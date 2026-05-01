@@ -1,0 +1,14 @@
+Run: main.py interactive session with in-session reset
+Command: main.py --session-id interactive-reset-proof-3
+ReturnCode: 0
+
+Homework 2 agent is ready.
+Commands: reset, exit, quit
+You: Bot: Got it — Aviv and Kfir. I’ll keep that in mind for this conversation.
+You: Bot: Your project partner is Kfir.
+You: Bot: Conversation memory cleared.
+You: Bot: I don’t have access to your project records, so I can’t tell who your partner is. If you share the project details or a roster, I can help you identify them.
+You: 
+
+[stderr]
+[non-fatal] Tracing: server error 504, retrying.
