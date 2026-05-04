@@ -20,7 +20,10 @@ For a full setup and execution walkthrough, see [RUN_HOMEWORK_GUIDE.md](RUN_HOME
 - [tools.py](tools.py): deterministic tools and tool guardrails
 - [guardrails.py](guardrails.py): SDK-native input and output guardrails
 - [schemas.py](schemas.py): structured router output schemas and validation
+- [bootstrap.py](bootstrap.py): registers the OpenAI client (api key, org, project) as the SDK default
+- [config.py](config.py): paths, default model, session id, refusal message
 - [demos.py](demos.py): assignment demos for parts A-I
+- [tests/](tests): pytest suite for guardrails, schemas, tools, memory
 
 ## Setup
 
@@ -36,6 +39,13 @@ python -m venv .venv
 
 ```env
 OPENAI_API_KEY=sk-...
+```
+
+For project-scoped keys (`sk-proj-*`) the OpenAI API also needs the matching org and project ids:
+
+```env
+OPENAI_ORG_ID=org-...
+OPENAI_PROJECT_ID=proj_...
 ```
 
 Optional overrides:

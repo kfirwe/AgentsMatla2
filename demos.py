@@ -25,6 +25,8 @@ from agents import (
 )
 from dotenv import load_dotenv
 
+from bootstrap import configure_openai_client
+
 from agents_def import (
     exchange_agent,
     general_chat_agent,
@@ -45,7 +47,8 @@ from guardrails import final_output_safety_guardrail, get_guardrail_user_message
 from schemas import REQUIRED_SLOT_BY_INTENT, validate_router_decision
 
 
-load_dotenv(override=False)
+load_dotenv(override=True)
+configure_openai_client()
 
 
 def build_run_config() -> RunConfig:
@@ -293,13 +296,13 @@ async def run_part_i() -> None:
     with trace("Part I - Memory"):
         first = await run_with_guardrail_handling(
             router_with_handoffs,
-            "My name is Aviv and my project partner is Kfir. Remember that.",
+            "We are Kfir and Aviv, project partners on Homework 2. Remember both of our names.",
             session=session,
             run_config=build_run_config(),
         )
         second = await run_with_guardrail_handling(
             router_with_handoffs,
-            "What is my name?",
+            "What are our names?",
             session=session,
             run_config=build_run_config(),
         )
@@ -310,7 +313,7 @@ async def run_part_i() -> None:
         recreated_session = build_demo_session(session_id)
         third = await run_with_guardrail_handling(
             router_with_handoffs,
-            "Who is my project partner?",
+            "Remind me of both of our names that you were asked to remember.",
             session=recreated_session,
             run_config=build_run_config(),
         )

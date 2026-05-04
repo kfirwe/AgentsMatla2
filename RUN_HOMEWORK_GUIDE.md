@@ -22,6 +22,8 @@ Main files:
 - [tools.py](tools.py): deterministic tools and tool guardrails
 - [guardrails.py](guardrails.py): input and output guardrails
 - [schemas.py](schemas.py): structured router schemas and validation
+- [bootstrap.py](bootstrap.py): registers the OpenAI client (api key, org, project) as the SDK default
+- [config.py](config.py): paths, default model, session id, refusal message
 - [ARCHITECTURE.md](ARCHITECTURE.md): short architecture explanation
 
 ## Prerequisites
@@ -47,6 +49,9 @@ Preferred approach: create a local `.env` file:
 
 ```env
 OPENAI_API_KEY=sk-...
+# Required when using a project-scoped key (sk-proj-*):
+OPENAI_ORG_ID=org-...
+OPENAI_PROJECT_ID=proj_...
 OPENAI_AGENT_MODEL=gpt-5.4-mini
 OPENAI_SESSION_ID=aviv-kfir-homework2
 ```
@@ -88,13 +93,13 @@ Example interaction flow:
 3. Ask a word problem:
    `Yossi has 5 apples, ate 2, bought 10 more. How many does he have?`
 4. Test memory:
-   `My name is Aviv and my partner is Kfir. Remember that.`
+   `We are Kfir and Aviv, project partners on Homework 2. Remember both of our names.`
    then
-   `Who is my partner?`
+   `What are our names?`
 5. Test reset:
    `reset`
    then
-   `Who is my partner?`
+   `What are our names?`
 
 ## Run a single one-off message
 
@@ -107,8 +112,8 @@ Useful for quick checks:
 Use a custom persistent session id:
 
 ```powershell
-.\.venv\Scripts\python main.py --session-id my-demo --message "My name is Aviv."
-.\.venv\Scripts\python main.py --session-id my-demo --message "What is my name?"
+.\.venv\Scripts\python main.py --session-id my-demo --message "We are Kfir and Aviv."
+.\.venv\Scripts\python main.py --session-id my-demo --message "What are our names?"
 ```
 
 Reset a session before sending a one-off message:

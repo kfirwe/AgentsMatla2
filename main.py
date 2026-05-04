@@ -18,6 +18,8 @@ from agents import (
 )
 from dotenv import load_dotenv
 
+from bootstrap import configure_openai_client
+
 from agents_def import router_with_handoffs
 from config import (
     DATA_DIR,
@@ -29,7 +31,8 @@ from config import (
 from guardrails import get_guardrail_user_message
 
 
-load_dotenv(override=False)
+load_dotenv(override=True)
+configure_openai_client()
 
 
 def build_session(session_id: str) -> SQLiteSession:

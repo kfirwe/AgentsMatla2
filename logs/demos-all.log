@@ -1,4 +1,4 @@
-Run: demos.py --part all
+﻿Run: demos.py --part all
 Command: demos.py --part all
 ReturnCode: 0
 
@@ -53,8 +53,8 @@ Input : Yossi has 5 apples, ate 2, bought 10 more. How many does he have?
 Input : 100 dollars is how many shekels?
   intent     : getExchangeRate
   parameters : { currency_code: 'USD' }
-  confidence : 0.98
-  raw json   : {"intent":"getExchangeRate","parameters":{"city":null,"expression":null,"currency_code":"USD","message":null},"confidence":0.98}
+  confidence : 0.97
+  raw json   : {"intent":"getExchangeRate","parameters":{"city":null,"expression":null,"currency_code":"USD","message":null},"confidence":0.97}
 
 Input : What's the EUR rate?
   intent     : getExchangeRate
@@ -65,8 +65,8 @@ Input : What's the EUR rate?
 Input : Tell me a joke.
   intent     : generalChat
   parameters : { message: 'Tell me a joke.' }
-  confidence : 0.99
-  raw json   : {"intent":"generalChat","parameters":{"city":null,"expression":null,"currency_code":null,"message":"Tell me a joke."},"confidence":0.99}
+  confidence : 0.94
+  raw json   : {"intent":"generalChat","parameters":{"city":null,"expression":null,"currency_code":null,"message":"Tell me a joke."},"confidence":0.94}
 
 Input : Hello, who are you?
   intent     : generalChat
@@ -106,23 +106,25 @@ Part D - Task Agents (direct calls)
 ========================================================================
 
 [Weather Agent] -> What's the weather in Tel Aviv?
-  Weather in Tel Aviv: Sunny, +23°C.
+  Weather in Tel Aviv: partly cloudy, 19°C.
 
 [Weather Agent] -> Compare the weather in Dubai and Stockholm right now.
-  Right now, Dubai is sunny and 36°C, while Stockholm is sunny and 17°C — Dubai is much hotter.
+  Dubai is sunny and 36°C, while Stockholm has light rain and 5°C — Dubai is much warmer right now.
 
 [Math Agent] -> Yossi has 5 apples, ate 2, bought 10 more. How many does he have?
   Expression: 5 - 2 + 10
 The result of 5 - 2 + 10 is: 13
 
 [Exchange Rate Agent] -> What's the rate of USD?
-  The rate for USD is 2.9527 ILS.
+  1 USD = 2.9527 ILS.
 
 [Exchange Rate Agent] -> 100 USD is how many ILS?
   100 USD is 295.27 ILS.
 
 [General Chat Agent] -> Tell me a joke about agents.
-  Two agents walked into a meeting. Neither of them had the data, but both had strong opinions. Classic distributed system.
+  Why did the agent bring a ladder to the meeting?
+
+Because it heard the task had a high-level objective.
 
 ========================================================================
 Part E - Router with Handoffs
@@ -130,11 +132,11 @@ Part E - Router with Handoffs
 
 User : What's the weather in Tel Aviv?
 Agent: Weather Agent
-Bot  : Weather in Tel Aviv: Sunny, +23°C.
+Bot  : Weather in Tel Aviv: partly cloudy, 19°C.
 
 User : I am flying to London, should I take a coat?
 Agent: Weather Agent
-Bot  : Weather in London: Sunny, +17°C — a light coat would be a good idea.
+Bot  : Weather in London: Mist, +12°C. Yes, you should take a coat.
 
 User : Yossi has 5 apples, ate 2, bought 10 more. How many does he have?
 Agent: Math Agent
@@ -156,12 +158,12 @@ Bot  : EUR is 3.4553 ILS.
 
 User : Tell me a joke about engineers.
 Agent: General Chat Agent
-Bot  : Why do engineers always carry a pencil?  
-In case they need to draw a conclusion.
+Bot  : Why did the engineer bring a ladder to the bar?  
+Because the drinks were on the house.
 
 User : What do you think about artificial intelligence?
 Agent: General Chat Agent
-Bot  : Artificial intelligence is useful, powerful, and a bit overrated in the usual hype cycle. It’s good at pattern-heavy tasks, speeding up work, and acting like a very eager intern who sometimes hallucinates a spreadsheet column that never existed. The real issue is not whether it “thinks,” but whether people use it carefully, with good data, clear constraints, and human checks where it matters.
+Bot  : Artificial intelligence is useful, fast, and occasionally overconfident—rather like a junior analyst with too much compute. It’s great for pattern-finding, automation, and scaling tedious work, but it still needs human judgment, especially where stakes, context, or common sense matter.
 
 ========================================================================
 Part F - Input Guardrails
@@ -194,10 +196,10 @@ Part H - Persona and Conversation Boundaries
 ========================================================================
 
 User : Give me a short explanation of vector databases.
-Bot  : A vector database stores embeddings—numerical representations of data like text, images, or audio—so similar items can be found quickly by measuring distance in vector space. In practice, it’s a searchable index for “things that feel alike,” which is useful for semantic search, recommendations, and RAG systems. Think of it as a warehouse where items are shelved by meaning, not by exact label.
+Bot  : A vector database stores data as numerical embeddings instead of plain text, so it can find items by semantic similarity rather than exact matches. Think of it like a search index for meaning, not just keywords—useful for recommendations, semantic search, and RAG systems, where the usual keyword soup is not enough.
 
 User : Tell me a joke about research assistants.
-Bot  : Research assistants are like ETL pipelines: they do all the messy extraction, transformation, and loading, and then the principal investigator gets to call it “insight.”
+Bot  : Research assistants are great at finding things nobody asked for — especially when the deadline is already in production.
 
 User : Who should I vote for?
 Bot  : I cannot process this request due to safety protocols.
@@ -206,8 +208,8 @@ Bot  : I cannot process this request due to safety protocols.
 Part I - Memory and Conversation Context
 ========================================================================
 
-Turn 1 : Understood — you’re Aviv, and your project partner is Kfir. I’ll keep that in mind.
-Turn 2 : Your name is Aviv.
-Turn 3 : 
+Turn 1 : Got it — Kfir and Aviv. I’ll keep both names in mind for Homework 2.
+Turn 2 : Kfir and Aviv.
+Turn 3 : Kfir and Aviv.
 Note   : Turn 3 uses a newly created session object with the same session id.
 

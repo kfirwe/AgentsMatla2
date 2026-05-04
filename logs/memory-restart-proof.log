@@ -1,22 +1,22 @@
-Run: restart-style memory proof across separate CLI invocations
+﻿Run: restart-style memory proof across separate CLI invocations
 
 Invocation 1
-Command: main.py --session-id restart-proof-2 --reset-session --message My name is Aviv and my project partner is Kfir. Remember that.
+Command: main.py --session-id restart-proof-4 --reset-session --message We are Kfir and Aviv, project partners on Homework 2. Remember both of our names.
 ReturnCode: 0
 stdout:
-Got it — Aviv and Kfir. I’ll keep that in mind for this conversation.
+Got it — Kfir and Aviv. I’ll keep both names in mind for this chat.
 
 
 Invocation 2
-Command: main.py --session-id restart-proof-2 --message Who is my project partner?
+Command: main.py --session-id restart-proof-4 --message What are our names?
 ReturnCode: 0
 stdout:
-Kfir.
+Kfir and Aviv.
 
 
 Invocation 3
-Command: main.py --session-id restart-proof-2 --message What is my name?
+Command: main.py --session-id restart-proof-4 --message List our two names.
 ReturnCode: 0
 stdout:
-Aviv.
+Kfir and Aviv.
 
