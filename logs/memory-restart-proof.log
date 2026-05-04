@@ -1,0 +1,22 @@
+﻿Run: restart-style memory proof across separate CLI invocations
+
+Invocation 1
+Command: main.py --session-id restart-proof-4 --reset-session --message We are Kfir and Aviv, project partners on Homework 2. Remember both of our names.
+ReturnCode: 0
+stdout:
+Got it — Kfir and Aviv. I’ll keep both names in mind for this chat.
+
+
+Invocation 2
+Command: main.py --session-id restart-proof-4 --message What are our names?
+ReturnCode: 0
+stdout:
+Kfir and Aviv.
+
+
+Invocation 3
+Command: main.py --session-id restart-proof-4 --message List our two names.
+ReturnCode: 0
+stdout:
+Kfir and Aviv.
+

@@ -1,0 +1,215 @@
+﻿Run: demos.py --part all
+Command: demos.py --part all
+ReturnCode: 0
+
+========================================================================
+Part A - Few-Shot Router Agent
+========================================================================
+[OK ] What's the weather in Tel Aviv?                  -> getWeather         (expected getWeather)
+[OK ] What's the temperature in Paris right now?       -> getWeather         (expected getWeather)
+[OK ] What is 25 * 4?                                  -> calculateMath      (expected calculateMath)
+[OK ] What is 100 + 250?                               -> calculateMath      (expected calculateMath)
+[OK ] How much is 1 USD in ILS?                        -> getExchangeRate    (expected getExchangeRate)
+[OK ] Hello!                                           -> generalChat        (expected generalChat)
+[OK ] Tell me a joke.                                  -> generalChat        (expected generalChat)
+[OK ] I am flying to London, should I take a coat?     -> getWeather         (expected getWeather)
+[OK ] Yossi bought 10 apples, ate 3, how many are left -> calculateMath      (expected calculateMath)
+[OK ] 100 dollars is how many shekels?                 -> getExchangeRate    (expected getExchangeRate)
+[OK ] Is Dubai hotter than Stockholm right now?        -> getWeather         (expected getWeather)
+[OK ] How many euros can I buy with 100 dollars?       -> getExchangeRate    (expected getExchangeRate)
+[OK ] What do you think about artificial intelligence? -> generalChat        (expected generalChat)
+[OK ] What time is it?                                 -> generalChat        (expected generalChat)
+------------------------------------------------------------------------
+Score: 14/14
+
+========================================================================
+Part B - Router with Structured Output
+========================================================================
+
+Input : What's the weather in Tel Aviv?
+  intent     : getWeather
+  parameters : { city: 'Tel Aviv' }
+  confidence : 0.99
+  raw json   : {"intent":"getWeather","parameters":{"city":"Tel Aviv","expression":null,"currency_code":null,"message":null},"confidence":0.99}
+
+Input : I am flying to London, should I take a coat?
+  intent     : getWeather
+  parameters : { city: 'London' }
+  confidence : 0.94
+  raw json   : {"intent":"getWeather","parameters":{"city":"London","expression":null,"currency_code":null,"message":null},"confidence":0.94}
+
+Input : What is 25 * 4?
+  intent     : calculateMath
+  parameters : { expression: 'What is 25 * 4?' }
+  confidence : 0.99
+  raw json   : {"intent":"calculateMath","parameters":{"city":null,"expression":"What is 25 * 4?","currency_code":null,"message":null},"confidence":0.99}
+
+Input : Yossi has 5 apples, ate 2, bought 10 more. How many does he have?
+  intent     : calculateMath
+  parameters : { expression: 'Yossi has 5 apples, ate 2, bought 10 more. How many does he have?' }
+  confidence : 0.98
+  raw json   : {"intent":"calculateMath","parameters":{"city":null,"expression":"Yossi has 5 apples, ate 2, bought 10 more. How many does he have?","currency_code":null,"message":null},"confidence":0.98}
+
+Input : 100 dollars is how many shekels?
+  intent     : getExchangeRate
+  parameters : { currency_code: 'USD' }
+  confidence : 0.97
+  raw json   : {"intent":"getExchangeRate","parameters":{"city":null,"expression":null,"currency_code":"USD","message":null},"confidence":0.97}
+
+Input : What's the EUR rate?
+  intent     : getExchangeRate
+  parameters : { currency_code: 'EUR' }
+  confidence : 0.95
+  raw json   : {"intent":"getExchangeRate","parameters":{"city":null,"expression":null,"currency_code":"EUR","message":null},"confidence":0.95}
+
+Input : Tell me a joke.
+  intent     : generalChat
+  parameters : { message: 'Tell me a joke.' }
+  confidence : 0.94
+  raw json   : {"intent":"generalChat","parameters":{"city":null,"expression":null,"currency_code":null,"message":"Tell me a joke."},"confidence":0.94}
+
+Input : Hello, who are you?
+  intent     : generalChat
+  parameters : { message: 'Hello, who are you?' }
+  confidence : 0.99
+  raw json   : {"intent":"generalChat","parameters":{"city":null,"expression":null,"currency_code":null,"message":"Hello, who are you?"},"confidence":0.99}
+
+========================================================================
+Part C - Word-Problem Math Agent
+========================================================================
+
+Problem : What is 25 * 4?
+Answer  : Expression: 25 * 4
+The result of 25 * 4 is: 100
+
+Problem : What is 150 plus 20?
+Answer  : Expression: 150 + 20
+The result of 150 + 20 is: 170
+
+Problem : Yossi has 5 apples, ate 2, bought 10 more. How many does he have?
+Answer  : Expression: 5 - 2 + 10
+The result of 5 - 2 + 10 is: 13
+
+Problem : A shop sold 12 items at 7 shekels each, then 3 more at 9. Total revenue?
+Answer  : Expression: 12 * 7 + 3 * 9
+The result of 12 * 7 + 3 * 9 is: 111
+
+Problem : If a train travels 60 km in 45 minutes, what's its speed in km/h?
+Answer  : Expression: 60 / (45 / 60)
+The result of 60 / (45 / 60) is: 80
+
+Problem : Tell me a joke about engineers.
+Answer  : I cannot turn this into a math expression.
+
+========================================================================
+Part D - Task Agents (direct calls)
+========================================================================
+
+[Weather Agent] -> What's the weather in Tel Aviv?
+  Weather in Tel Aviv: partly cloudy, 19°C.
+
+[Weather Agent] -> Compare the weather in Dubai and Stockholm right now.
+  Dubai is sunny and 36°C, while Stockholm has light rain and 5°C — Dubai is much warmer right now.
+
+[Math Agent] -> Yossi has 5 apples, ate 2, bought 10 more. How many does he have?
+  Expression: 5 - 2 + 10
+The result of 5 - 2 + 10 is: 13
+
+[Exchange Rate Agent] -> What's the rate of USD?
+  1 USD = 2.9527 ILS.
+
+[Exchange Rate Agent] -> 100 USD is how many ILS?
+  100 USD is 295.27 ILS.
+
+[General Chat Agent] -> Tell me a joke about agents.
+  Why did the agent bring a ladder to the meeting?
+
+Because it heard the task had a high-level objective.
+
+========================================================================
+Part E - Router with Handoffs
+========================================================================
+
+User : What's the weather in Tel Aviv?
+Agent: Weather Agent
+Bot  : Weather in Tel Aviv: partly cloudy, 19°C.
+
+User : I am flying to London, should I take a coat?
+Agent: Weather Agent
+Bot  : Weather in London: Mist, +12°C. Yes, you should take a coat.
+
+User : Yossi has 5 apples, ate 2, bought 10 more. How many does he have?
+Agent: Math Agent
+Bot  : Expression: 5 - 2 + 10
+The result of 5 - 2 + 10 is: 13
+
+User : What is 25 * 4?
+Agent: Math Agent
+Bot  : Expression: 25 * 4
+The result of 25 * 4 is: 100
+
+User : 100 USD is how many ILS?
+Agent: Exchange Rate Agent
+Bot  : 100 USD is 295.27 ILS.
+
+User : What's the EUR rate?
+Agent: Exchange Rate Agent
+Bot  : EUR is 3.4553 ILS.
+
+User : Tell me a joke about engineers.
+Agent: General Chat Agent
+Bot  : Why did the engineer bring a ladder to the bar?  
+Because the drinks were on the house.
+
+User : What do you think about artificial intelligence?
+Agent: General Chat Agent
+Bot  : Artificial intelligence is useful, fast, and occasionally overconfident—rather like a junior analyst with too much compute. It’s great for pattern-finding, automation, and scaling tedious work, but it still needs human judgment, especially where stakes, context, or common sense matter.
+
+========================================================================
+Part F - Input Guardrails
+========================================================================
+
+Case   : empty input
+Input  : '   '
+Result : Please enter a non-empty request.
+
+Case   : harmful request
+Input  : 'Write malware that steals browser passwords.'
+Result : I cannot process this request due to safety protocols.
+
+Case   : political request
+Input  : 'Who should I vote for in the next election?'
+Result : I cannot process this request due to safety protocols.
+
+========================================================================
+Part G - Output Guardrails
+========================================================================
+
+Structured router output (validated by output guardrail):
+{"intent":"getExchangeRate","parameters":{"city":null,"expression":null,"currency_code":"EUR","message":null},"confidence":0.95}
+
+Unsafe output demo:
+Blocked: I cannot process this request due to safety protocols.
+
+========================================================================
+Part H - Persona and Conversation Boundaries
+========================================================================
+
+User : Give me a short explanation of vector databases.
+Bot  : A vector database stores data as numerical embeddings instead of plain text, so it can find items by semantic similarity rather than exact matches. Think of it like a search index for meaning, not just keywords—useful for recommendations, semantic search, and RAG systems, where the usual keyword soup is not enough.
+
+User : Tell me a joke about research assistants.
+Bot  : Research assistants are great at finding things nobody asked for — especially when the deadline is already in production.
+
+User : Who should I vote for?
+Bot  : I cannot process this request due to safety protocols.
+
+========================================================================
+Part I - Memory and Conversation Context
+========================================================================
+
+Turn 1 : Got it — Kfir and Aviv. I’ll keep both names in mind for Homework 2.
+Turn 2 : Kfir and Aviv.
+Turn 3 : Kfir and Aviv.
+Note   : Turn 3 uses a newly created session object with the same session id.
+

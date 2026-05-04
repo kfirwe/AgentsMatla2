@@ -1,0 +1,11 @@
+﻿Run: main.py interactive session with in-session reset
+Command: main.py --session-id interactive-reset-proof-5
+ReturnCode: 0
+
+Homework 2 agent is ready.
+Commands: reset, exit, quit
+You: Bot: Got it — Kfir and Aviv. I’ll keep both names in mind for this conversation.
+You: Bot: Kfir and Aviv.
+You: Bot: Conversation memory cleared.
+You: Bot: I don’t have your name or mine in this chat. If you tell me yours, I’ll use it. As for me, I’m just the assistant—an API-shaped cog in the pipeline.
+You: 
